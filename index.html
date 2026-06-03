@@ -8,44 +8,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0A0D16;
-      --surface: #151B2C;
-      --line: #2A3349;
-      --lime: #C9FF3D;
-      --coral: #FF5A3C;
-      --gold: #FFC93C;
-      --text: #F3F4EE;
-      --muted: #8A90A6;
+      --bg: #0A0D16; --surface: #151B2C; --line: #2A3349; --lime: #C9FF3D; --coral: #FF5A3C; --gold: #FFC93C; --text: #F3F4EE; --muted: #8A90A6;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; padding-bottom: 100px; }
     .container { max-width: 920px; margin: 0 auto; padding: 18px 14px; }
     h1 { font-family: 'Anton', sans-serif; font-size: 28px; margin-bottom: 8px; }
-    h2 { font-family: 'Anton', sans-serif; font-size: 18px; margin-bottom: 12px; color: var(--lime); }
+    h2 { font-family: 'Anton', sans-serif; font-size: 16px; margin-bottom: 12px; color: var(--lime); }
     p { color: var(--muted); font-size: 12px; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 15px; }
-    input, select { width: 100%; background: #0F1422; border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 10px; margin-bottom: 12px; font-family: inherit; }
-    button { width: 100%; background: var(--lime); color: var(--bg); border: none; border-radius: 8px; padding: 12px; font-weight: 700; cursor: pointer; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 12px; }
+    input, select { width: 100%; background: #0F1422; border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 10px; margin-bottom: 12px; font-family: inherit; font-size: 14px; }
+    button { width: 100%; background: var(--lime); color: var(--bg); border: none; border-radius: 8px; padding: 11px; font-weight: 700; cursor: pointer; font-size: 14px; }
     button:hover { opacity: 0.9; }
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-    .tab-btn { flex: 1; min-width: 100px; background: #1C2438; color: var(--muted); border: 1px solid var(--line); padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .tab-btn { flex: 1; min-width: 90px; background: #1C2438; color: var(--muted); border: 1px solid var(--line); padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px; }
     .tab-btn.active { background: var(--lime); color: var(--bg); }
     .hidden { display: none; }
-    .badge { background: rgba(201,255,61,.15); color: var(--lime); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-block; margin-right: 6px; }
+    .badge { background: rgba(201,255,61,.15); color: var(--lime); padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; display: inline-block; margin-right: 6px; margin-bottom: 4px; }
     .match { background: #0F1422; border: 1px solid #1C2438; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
-    .match-inputs { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
-    .match-inputs input { margin: 0; width: 50px; text-align: center; }
+    .match-header { font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+    .match-inputs { display: flex; gap: 6px; align-items: center; margin-top: 8px; }
+    .match-inputs input { margin: 0; width: 50px; text-align: center; padding: 8px 0; }
     .loading { text-align: center; color: var(--muted); padding: 40px; }
     table { width: 100%; border-collapse: collapse; }
-    table td { padding: 10px; border-bottom: 1px solid var(--line); }
-    table th { background: #0F1422; padding: 10px; text-align: left; font-weight: 700; }
-    hr { border: none; border-top: 1px solid var(--line); margin: 14px 0; }
+    table td { padding: 10px; border-bottom: 1px solid var(--line); font-size: 13px; }
+    table th { background: #0F1422; padding: 10px; text-align: left; font-weight: 700; font-size: 13px; }
+    hr { border: none; border-top: 1px solid var(--line); margin: 12px 0; }
+    .pool-info { background: linear-gradient(135deg, #15203a, #151B2C); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .pool-amount { font-size: 32px; color: var(--lime); font-weight: 700; margin-top: 4px; }
+    .prize-chip { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; flex: 1; font-size: 11px; margin-right: 8px; margin-bottom: 8px; }
+    .prize-chip .label { color: var(--muted); font-weight: 700; font-size: 10px; }
+    .prize-chip .amount { color: var(--lime); font-weight: 700; margin-top: 3px; }
+    .leader-row { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+    .leader-pos { font-size: 22px; font-weight: 700; width: 30px; }
+    .leader-info { flex: 1; min-width: 0; }
+    .leader-name { font-weight: 700; margin-bottom: 4px; font-size: 14px; }
+    .leader-stats { font-size: 11px; color: var(--muted); }
+    .leader-prize { font-size: 14px; color: var(--lime); font-weight: 700; text-align: right; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,13,22,.95); border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 4px; padding: 8px; backdrop-filter: blur(8px); z-index: 50; }
+    .nav-btn { background: none; color: var(--muted); border: none; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .nav-btn.active { color: var(--lime); }
   </style>
 </head>
 <body>
   <div class="container">
     <div id="app"></div>
   </div>
+  <div class="bottom-nav" id="bottomNav"></div>
 
   <script>
     const { createClient } = supabase;
@@ -90,91 +99,62 @@
       ["Argelia","Austria","J","2026-06-27T22:00"],["Jordania","Argentina","J","2026-06-27T22:00"],
     ];
 
-    let state = { me: null, tab: 'partidos', config: null, users: {}, matches: [], preds: [], podium: {} };
+    let state = { me: null, tab: 'partidos', config: null, users: {}, matches: [], preds: {}, podium: {} };
     const appEl = document.getElementById('app');
+    const navEl = document.getElementById('bottomNav');
 
     async function init() {
-      appEl.innerHTML = '<div class="loading">Inicializando...</div>';
-      
+      appEl.innerHTML = '<div class="loading">Cargando...</div>';
       try {
-        const config = await sb.from('config').select('*').limit(1);
-        if(config.data && config.data.length) {
-          state.config = config.data[0];
-        }
+        const [cfg, u, m, p] = await Promise.all([
+          sb.from('config').select('*').limit(1),
+          sb.from('users').select('*'),
+          sb.from('matches').select('*'),
+          sb.from('predictions').select('*')
+        ]);
         
-        const matches = await sb.from('matches').select('*');
-        if(matches.data && matches.data.length) {
-          state.matches = matches.data;
-        } else {
-          for(let i = 0; i < SCHEDULE.length; i++) {
-            const x = SCHEDULE[i];
-            await sb.from('matches').insert([{ id: 'm' + (i+1), home: x[0], away: x[1], group_name: x[2], datetime: x[3], homeScore: '', awayScore: '', finished: false }]);
-          }
-          state.matches = SCHEDULE.map((x, i) => ({ id: 'm' + (i+1), home: x[0], away: x[1], group_name: x[2], datetime: x[3], homeScore: '', awayScore: '', finished: false }));
-        }
-        
-        const preds = await sb.from('predictions').select('*');
-        state.preds = preds.data || [];
+        state.config = cfg.data?.length ? cfg.data[0] : null;
+        (u.data || []).forEach(x => state.users[x.id] = x);
+        (m.data || []).forEach(x => { if(!state.matches.find(y => y.id === x.id)) state.matches.push(x); });
+        (p.data || []).forEach(x => state.preds[x.userId + '::' + x.matchId] = { home: x.homeScore, away: x.awayScore, ts: x.createdAt });
         
         if(!state.config) {
           render();
+        } else if(!state.matches.length) {
+          for(let i = 0; i < SCHEDULE.length; i++) {
+            const x = SCHEDULE[i];
+            await sb.from('matches').insert([{ id: 'm'+(i+1), home: x[0], away: x[1], group_name: x[2], datetime: x[3] }]);
+          }
+          state.matches = SCHEDULE.map((x,i) => ({ id: 'm'+(i+1), home: x[0], away: x[1], group_name: x[2], datetime: x[3], homeScore: '', awayScore: '', finished: false }));
+          render();
         } else {
           render();
         }
-      } catch(e) {
-        console.error(e);
-        render();
-      }
+      } catch(e) { console.error(e); render(); }
+    }
+
+    function hashPw(s) { let h=5381; for(let i=0;i<s.length;i++) h=((h<<5)+h)+s.charCodeAt(i); return "h"+(h>>>0).toString(16); }
+    function isLocked(m) { return m.finished || (m.datetime && new Date(m.datetime).getTime() <= Date.now()); }
+    function fmtDate(iso) { try { return new Date(iso).toLocaleString("es", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }); } catch { return iso; } }
+    function fmtMoney(n, c) { try { return new Intl.NumberFormat("es-CL", { style: "currency", currency: c||"CLP", maximumFractionDigits: 0 }).format(Math.round(n||0)); } catch { return "$"+Math.round(n||0); } }
+
+    function renderNav() {
+      const tabs = [{ id: 'partidos', label: 'Partidos' }, { id: 'podio', label: 'Podio' }, { id: 'tabla', label: 'Tabla' }];
+      if(state.me && state.users[state.me]?.role === 'admin') tabs.push({ id: 'admin', label: 'Admin' });
+      navEl.innerHTML = tabs.map(t => `<button class="nav-btn ${state.tab===t.id?'active':''}" onclick="setTab('${t.id}')">${t.label}</button>`).join('');
     }
 
     function render() {
       if(!state.config) {
-        appEl.innerHTML = `
-          <div class="card">
-            <h1>Crear la polla</h1>
-            <input type="text" id="poolName" placeholder="Nombre de la polla" value="Polla Mundial 2026">
-            <input type="text" id="adminName" placeholder="Tu nombre">
-            <input type="password" id="adminPw" placeholder="Tu contraseña">
-            <button onclick="createPool()">Crear</button>
-          </div>
-        `;
+        appEl.innerHTML = `<div class="card"><h1>Crear la polla</h1><input type="text" id="poolName" placeholder="Nombre de la polla" value="Polla Mundial 2026"><input type="text" id="adminName" placeholder="Tu nombre"><input type="password" id="adminPw" placeholder="Tu contraseña"><button onclick="createPool()">Crear</button></div>`;
+        navEl.innerHTML = '';
       } else if(!state.me) {
-        appEl.innerHTML = `
-          <div class="card">
-            <h1>${state.config.poolName || 'Polla Mundial 2026'}</h1>
-            <p>Pronósticos entre amigos</p>
-            <hr>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-              <button onclick="setMode('login')" style="background: #1C2438; color: var(--text);">Ingresar</button>
-              <button onclick="setMode('reg')" style="background: #1C2438; color: var(--text);">Registrarme</button>
-            </div>
-            <input type="text" id="user" placeholder="Usuario">
-            <input type="password" id="pw" placeholder="Contraseña">
-            <div id="regFields" class="hidden"><input type="text" id="name" placeholder="Tu nombre"></div>
-            <button onclick="doAuth()">Continuar</button>
-          </div>
-        `;
+        appEl.innerHTML = `<div class="card"><h1>${state.config.poolName}</h1><p>Pronósticos entre amigos</p><hr><div class="tabs"><button class="tab-btn active" onclick="setMode('login')" id="loginBtn">Ingresar</button><button class="tab-btn" onclick="setMode('reg')" id="regBtn">Registrarme</button></div><input type="text" id="user" placeholder="Usuario"><input type="password" id="pw" placeholder="Contraseña"><div id="regFields" class="hidden"><input type="text" id="name" placeholder="Tu nombre"></div><button onclick="doAuth()">Continuar</button></div>`;
+        navEl.innerHTML = '';
       } else {
-        const user = state.users[state.me];
-        appEl.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <div>
-              <h1>${state.config.poolName || 'Polla Mundial 2026'}</h1>
-              <p>${user?.displayName} ${user?.role === 'admin' ? '<span class="badge">ADMIN</span>' : ''}</p>
-            </div>
-            <button onclick="doLogout()" style="width: auto; padding: 8px 16px;">Salir</button>
-          </div>
-          
-          <div class="tabs">
-            <button class="tab-btn ${state.tab === 'partidos' ? 'active' : ''}" onclick="setTab('partidos')">Partidos</button>
-            <button class="tab-btn ${state.tab === 'podio' ? 'active' : ''}" onclick="setTab('podio')">Podio</button>
-            <button class="tab-btn ${state.tab === 'tabla' ? 'active' : ''}" onclick="setTab('tabla')">Tabla</button>
-            ${user?.role === 'admin' ? `<button class="tab-btn ${state.tab === 'admin' ? 'active' : ''}" onclick="setTab('admin')">Admin</button>` : ''}
-          </div>
-          
-          <div id="content"></div>
-        `;
-
+        const u = state.users[state.me];
+        appEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div><h1>${state.config.poolName}</h1><p>${u.displayName} ${u.role==='admin'?'<span class="badge">ADMIN</span>':''}</p></div><button onclick="doLogout()" style="width:auto;padding:8px 16px;">Salir</button></div><div id="content"></div>`;
+        renderNav();
         const content = document.getElementById('content');
         if(state.tab === 'partidos') renderPartidos(content);
         else if(state.tab === 'podio') renderPodio(content);
@@ -184,60 +164,54 @@
     }
 
     function renderPartidos(el) {
-      const open = state.matches.filter(m => new Date(m.datetime).getTime() > Date.now());
-      let html = `<h2>Partidos por jugar (${open.length})</h2>`;
-      open.slice(0, 20).forEach(m => {
-        const p = state.preds.find(x => x.userId === state.me && x.matchId === m.id);
-        html += `
-          <div class="match">
-            <div><strong>${m.home} vs ${m.away}</strong> <span style="color: var(--muted);">Grupo ${m.group_name}</span></div>
-            <div class="match-inputs">
-              <input type="number" id="h_${m.id}" value="${p?.homeScore || ''}" placeholder="0" min="0">
-              <span>:</span>
-              <input type="number" id="a_${m.id}" value="${p?.awayScore || ''}" placeholder="0" min="0">
-              <button onclick="savePred('${m.id}')" style="width: 100px; padding: 6px;">Guardar</button>
-            </div>
-          </div>
-        `;
+      const open = state.matches.filter(m => !isLocked(m));
+      let html = `<h2>Partidos (${open.length})</h2>`;
+      open.slice(0,15).forEach(m => {
+        const p = state.preds[state.me + '::' + m.id] || {};
+        html += `<div class="match"><div class="match-header">${m.home} vs ${m.away} <span style="color:var(--muted);">Grupo ${m.group_name}</span></div><div class="match-inputs"><input type="number" id="h_${m.id}" value="${p.home||''}" min="0"><span>:</span><input type="number" id="a_${m.id}" value="${p.away||''}" min="0"><button onclick="savePred('${m.id}')" style="width:80px;padding:6px;">Guardar</button></div></div>`;
       });
       el.innerHTML = html;
     }
 
     function renderPodio(el) {
-      const pod = state.podium[state.me] || {};
       const teams = [...new Set(state.matches.flatMap(m => [m.home, m.away]))].sort();
-      let html = `<h2>Apuesta de Podio</h2>`;
-      html += `<label>🥇 Campeón</label>
-        <select id="first">
-          <option value="">-- Elegir --</option>
-          ${teams.map(t => `<option value="${t}" ${pod.first === t ? 'selected' : ''}>${t}</option>`).join('')}
-        </select>
-        <label>🥈 Segundo</label>
-        <select id="second">
-          <option value="">-- Elegir --</option>
-          ${teams.map(t => `<option value="${t}" ${pod.second === t ? 'selected' : ''}>${t}</option>`).join('')}
-        </select>
-        <label>🥉 Tercero</label>
-        <select id="third">
-          <option value="">-- Elegir --</option>
-          ${teams.map(t => `<option value="${t}" ${pod.third === t ? 'selected' : ''}>${t}</option>`).join('')}
-        </select>
-        <button onclick="savePodium()">Guardar Podio</button>`;
+      const pod = state.podium[state.me] || {};
+      let html = `<h2>Apuesta de Podio</h2><div class="card"><label>🥇 Campeón</label><select id="first">${teams.map(t=>`<option value="${t}" ${pod.first===t?'selected':''}>${t}</option>`).join('')}</select><label>🥈 Segundo</label><select id="second">${teams.map(t=>`<option value="${t}" ${pod.second===t?'selected':''}>${t}</option>`).join('')}</select><label>🥉 Tercero</label><select id="third">${teams.map(t=>`<option value="${t}" ${pod.third===t?'selected':''}>${t}</option>`).join('')}</select><button onclick="savePodium()">Guardar Podio</button></div>`;
       el.innerHTML = html;
     }
 
     function renderTabla(el) {
-      let html = '<h2>Tabla de Posiciones</h2><table><tr><th>Usuario</th><th>Puntos</th><th>Pronósticos</th></tr>';
-      Object.keys(state.users).forEach(u => {
-        const pts = state.preds.filter(p => p.userId === u).length;
-        html += `<tr><td>${state.users[u].displayName}</td><td>${pts * 3}</td><td>${pts}</td></tr>`;
+      const monto = state.config.montoEntrada || 15000;
+      const currency = state.config.moneda || 'CLP';
+      const prizes = state.config.prizes || { first: 50, second: 25, third: 15, perfect: 10 };
+      const paidCount = Object.values(state.users).filter(u => u.paid).length;
+      const pozo = paidCount * monto;
+      
+      let html = `<div class="pool-info"><div style="font-size:12px;color:var(--muted);font-weight:700;">POZO TOTAL</div><div class="pool-amount">${fmtMoney(pozo, currency)}</div><div style="font-size:11px;color:var(--muted);margin-top:6px;">${paidCount}/${Object.keys(state.users).length} pagaron · ${fmtMoney(monto, currency)}</div></div>`;
+      
+      html += `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">`;
+      html += `<div class="prize-chip"><div class="label">🥇 1º (${prizes.first}%)</div><div class="amount">${fmtMoney(pozo*prizes.first/100, currency)}</div></div>`;
+      html += `<div class="prize-chip"><div class="label">🥈 2º (${prizes.second}%)</div><div class="amount">${fmtMoney(pozo*prizes.second/100, currency)}</div></div>`;
+      html += `<div class="prize-chip"><div class="label">🥉 3º (${prizes.third}%)</div><div class="amount">${fmtMoney(pozo*prizes.third/100, currency)}</div></div>`;
+      html += `<div class="prize-chip"><div class="label">🎯 Exactos (${prizes.perfect}%)</div><div class="amount">${fmtMoney(pozo*prizes.perfect/100, currency)}</div></div>`;
+      html += `</div>`;
+      
+      const rows = Object.keys(state.users).map(uid => {
+        const u = state.users[uid];
+        const pts = Object.keys(state.preds).filter(k => k.startsWith(uid + '::')).length * 3;
+        return { uid, name: u.displayName, paid: u.paid, pts };
+      }).sort((a,b) => b.pts - a.pts);
+      
+      rows.forEach((r, i) => {
+        const prize = i < 3 ? pozo * ([prizes.first, prizes.second, prizes.third][i] || 0) / 100 : 0;
+        html += `<div class="leader-row"><div class="leader-pos">${i+1}</div><div class="leader-info"><div class="leader-name">${r.name} ${r.paid?'<span class="badge">✓ pagó</span>':'<span class="badge" style="background:rgba(255,90,60,.12);color:#FF5A3C;">pendiente</span>'}</div><div class="leader-stats">${r.pts} puntos</div></div><div class="leader-prize">${fmtMoney(prize, currency)}</div></div>`;
       });
-      html += '</table>';
+      
       el.innerHTML = html;
     }
 
     function renderAdmin(el) {
-      el.innerHTML = '<h2>Panel Admin</h2><p>En desarrollo...</p>';
+      el.innerHTML = `<h2>Panel Admin</h2><div class="card"><p>En desarrollo. Accede a Supabase en console.supabase.co para editar datos.</p></div>`;
     }
 
     window.createPool = async function() {
@@ -246,67 +220,63 @@
       const adminPw = document.getElementById('adminPw').value;
       if(!adminName || !adminPw) return alert('Llena todos los campos');
       
-      const config = { poolName, scoring: { exact: 5, outcome: 3 }, montoEntrada: 15000, moneda: 'CLP' };
+      const config = { poolName, scoring: {exact:5, outcome:3, champion:10, second:5, third:2}, montoEntrada: 15000, moneda: 'CLP', prizes: {first:50, second:25, third:15, perfect:10} };
       await sb.from('config').insert([{ id: '1', ...config }]);
-      
-      const hashPw = (s) => { let h = 5381; for(let i = 0; i < s.length; i++) h = ((h << 5) + h) + s.charCodeAt(i); return "h" + (h >>> 0).toString(16); };
       await sb.from('users').insert([{ id: 'admin', displayName: adminName, pw: hashPw(adminPw), role: 'admin', paid: false }]);
       
       state.config = config;
-      state.users['admin'] = { displayName: adminName, role: 'admin' };
+      state.users['admin'] = { displayName: adminName, role: 'admin', paid: false };
       state.me = 'admin';
       render();
     };
 
     let authMode = 'login';
-    window.setMode = function(m) { authMode = m; document.getElementById('regFields')?.classList.toggle('hidden', m === 'login'); };
+    window.setMode = function(m) { authMode = m; document.getElementById('loginBtn')?.classList.toggle('active', m==='login'); document.getElementById('regBtn')?.classList.toggle('active', m==='reg'); document.getElementById('regFields')?.classList.toggle('hidden', m==='login'); };
     
     window.doAuth = async function() {
       const user = document.getElementById('user').value.toLowerCase();
       const pw = document.getElementById('pw').value;
       const name = document.getElementById('name').value;
       
-      const hashPw = (s) => { let h = 5381; for(let i = 0; i < s.length; i++) h = ((h << 5) + h) + s.charCodeAt(i); return "h" + (h >>> 0).toString(16); };
-      
       if(authMode === 'login') {
-        const users = await sb.from('users').select('*').eq('id', user);
-        if(!users.data || !users.data.length || users.data[0].pw !== hashPw(pw)) return alert('Usuario o contraseña incorrecto');
-        state.users[user] = users.data[0];
+        const u = await sb.from('users').select('*').eq('id', user);
+        if(!u.data?.length || u.data[0].pw !== hashPw(pw)) return alert('Usuario o contraseña incorrecto');
+        state.users[user] = u.data[0];
         state.me = user;
       } else {
         if(!user || !pw || !name) return alert('Llena todos los campos');
         await sb.from('users').insert([{ id: user, displayName: name, pw: hashPw(pw), role: 'participant', paid: false }]);
-        state.users[user] = { displayName: name, role: 'participant' };
+        state.users[user] = { displayName: name, role: 'participant', paid: false };
         state.me = user;
       }
       render();
     };
 
-    window.doLogout = function() { state.me = null; render(); };
+    window.doLogout = function() { state.me = null; state.tab = 'partidos'; render(); };
     window.setTab = function(t) { state.tab = t; render(); };
     
     window.savePred = async function(mid) {
-      const h = document.getElementById(`h_${mid}`).value;
-      const a = document.getElementById(`a_${mid}`).value;
+      const h = +document.getElementById(`h_${mid}`).value;
+      const a = +document.getElementById(`a_${mid}`).value;
       if(!h || !a) return alert('Completa ambos campos');
       
-      const exist = state.preds.find(p => p.userId === state.me && p.matchId === mid);
-      if(exist) {
-        await sb.from('predictions').update({ homeScore: +h, awayScore: +a }).eq('id', exist.id);
-        exist.homeScore = +h;
-        exist.awayScore = +a;
+      const exist = await sb.from('predictions').select('*').eq('userId', state.me).eq('matchId', mid);
+      const key = state.me + '::' + mid;
+      
+      if(exist.data?.length) {
+        await sb.from('predictions').update({ homeScore: h, awayScore: a }).eq('id', exist.data[0].id);
       } else {
-        await sb.from('predictions').insert([{ id: Date.now() + '', userId: state.me, matchId: mid, homeScore: +h, awayScore: +a }]);
-        state.preds.push({ userId: state.me, matchId: mid, homeScore: +h, awayScore: +a });
+        await sb.from('predictions').insert([{ id: Date.now()+'', userId: state.me, matchId: mid, homeScore: h, awayScore: a }]);
       }
+      
+      state.preds[key] = { home: h, away: a };
       render();
     };
 
-    window.savePodium = async function() {
+    window.savePodium = function() {
       const first = document.getElementById('first').value;
       const second = document.getElementById('second').value;
       const third = document.getElementById('third').value;
-      
       state.podium[state.me] = { first, second, third };
       render();
     };
