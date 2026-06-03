@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polla Mundial 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      background: #0A0D16; 
+      color: #F3F4EE; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 10px; }
+    .subtitle { color: #8A90A6; font-size: 13px; margin-bottom: 20px; }
+    
+    .card { background: #151B2C; border: 1px solid #2A3349; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+    
+    input, select, textarea { 
+      width: 100%; 
+      background: #0F1422; 
+      border: 1px solid #2A3349; 
+      color: #F3F4EE; 
+      border-radius: 8px; 
+      padding: 10px; 
+      margin-bottom: 12px; 
+      font-family: inherit; 
+      font-size: 14px;
+    }
+    
+    button { 
+      width: 100%; 
+      background: #C9FF3D; 
+      color: #0A0D16; 
+      border: none; 
+      border-radius: 8px; 
+      padding: 12px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      font-size: 14px;
+    }
+    button:hover { opacity: 0.9; }
+    
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { 
+      flex: 1; 
+      background: #1C2438; 
+      color: #8A90A6; 
+      border: 1px solid #2A3349; 
+      padding: 10px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 700;
+    }
+    .tab-btn.active { background: #C9FF3D; color: #0A0D16; }
+    
+    .hidden { display: none; }
+    .error { color: #FF5A3C; margin: 10px 0; }
+    .success { color: #C9FF3D; margin: 10px 0; }
+    
+    table { width: 100%; border-collapse: collapse; }
+    table td { padding: 10px; border-bottom: 1px solid #2A3349; }
+    table th { background: #0F1422; padding: 10px; text-align: left; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Polla Mundial 2026</h1>
+    <p class="subtitle">Pronósticos entre amigos</p>
+    
+    <div id="app"></div>
+  </div>
+
+  <script>
+    // CONFIG
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIIFmP1w8C5TA-a0O6mPTS0krFynIjC4YandOtK8ZEZrIQCi1Pcgm-htv9htiTjRk/exec";
+    
+    const SCHEDULE = [
+      ["México","Sudáfrica","A","2026-06-11T15:00"],["Corea del Sur","República Checa","A","2026-06-11T22:00"],
+      ["Canadá","Bosnia y Herzegovina","B","2026-06-12T15:00"],["Estados Unidos","Paraguay","D","2026-06-12T21:00"],
+      ["Catar","Suiza","B","2026-06-13T15:00"],["Brasil","Marruecos","C","2026-06-13T18:00"],
+      ["Haití","Escocia","C","2026-06-13T21:00"],["Australia","Turquía","D","2026-06-14T00:00"],
+      ["Alemania","Curazao","E","2026-06-14T13:00"],["Países Bajos","Japón","F","2026-06-14T16:00"],
+      ["Costa de Marfil","Ecuador","E","2026-06-14T19:00"],["Suecia","Túnez","F","2026-06-14T22:00"],
+      ["España","Cabo Verde","H","2026-06-15T12:00"],["Bélgica","Egipto","G","2026-06-15T15:00"],
+      ["Arabia Saudí","Uruguay","H","2026-06-15T18:00"],["Irán","Nueva Zelanda","G","2026-06-15T21:00"],
+      ["Francia","Senegal","I","2026-06-16T15:00"],["Irak","Noruega","I","2026-06-16T18:00"],
+      ["Argentina","Argelia","J","2026-06-16T21:00"],["Austria","Jordania","J","2026-06-17T00:00"],
+    ];
+
+    let state = { matches: SCHEDULE.map((x, i) => ({ id: i+1, home: x[0], away: x[1], group: x[2], datetime: x[3] })), usuario: null, tab: 'partidos', preds: [] };
+    const appEl = document.getElementById('app');
+
+    async function loadData() {
+      try {
+        const response = await fetch(APPS_SCRIPT_URL);
+        const data = await response.json();
+        state.preds = data.slice(1).map(row => ({ id: row[0], usuario: row[1], partido: row[2], local: row[3], visitante: row[4] }));
+        render();
+      } catch(e) {
+        console.error(e);
+        render();
+      }
+    }
+
+    async function savePred(id, usuario, partido, local, visitante) {
+      try {
+        const payload = { id: Date.now(), usuario, partido, local, visitante };
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        state.preds.push(payload);
+        render();
+      } catch(e) {
+        console.error(e);
+        alert('Error al guardar');
+      }
+    }
+
+    function render() {
+      if(!state.usuario) {
+        appEl.innerHTML = `
+          <div class="card">
+            <input type="text" id="usuario" placeholder="Tu nombre" onkeydown="if(event.key==='Enter') setUsuario()">
+            <button onclick="setUsuario()">Continuar</button>
+          </div>
+        `;
+      } else {
+        appEl.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <p style="color: #8A90A6;">Conectado como: <strong>${state.usuario}</strong></p>
+            </div>
+            <button onclick="salir()" style="width: auto; padding: 8px 16px;">Salir</button>
+          </div>
+          
+          <div class="tabs">
+            <button class="tab-btn ${state.tab === 'partidos' ? 'active' : ''}" onclick="setTab('partidos')">Partidos</button>
+            <button class="tab-btn ${state.tab === 'tabla' ? 'active' : ''}" onclick="setTab('tabla')">Tabla</button>
+          </div>
+          
+          <div id="content"></div>
+        `;
+
+        const content = document.getElementById('content');
+        if(state.tab === 'partidos') {
+          let html = '<h2 style="margin-bottom: 12px;">Mis pronósticos</h2>';
+          state.matches.slice(0, 10).forEach(m => {
+            const pred = state.preds.find(p => p.usuario === state.usuario && p.partido == m.id);
+            html += `
+              <div class="card">
+                <div style="margin-bottom: 10px;"><strong>${m.home} vs ${m.away}</strong> <span style="color: #8A90A6;">${m.group}</span></div>
+                <div style="display: flex; gap: 10px;">
+                  <input type="number" id="local_${m.id}" placeholder="0" value="${pred ? pred.local : ''}" style="width: 60px;">
+                  <span>:</span>
+                  <input type="number" id="visitante_${m.id}" placeholder="0" value="${pred ? pred.visitante : ''}" style="width: 60px;">
+                  <button onclick="guardar(${m.id})" style="width: 100px;">Guardar</button>
+                </div>
+              </div>
+            `;
+          });
+          content.innerHTML = html;
+        } else if(state.tab === 'tabla') {
+          let html = '<h2 style="margin-bottom: 12px;">Tabla de resultados</h2><table><thead><tr><th>Usuario</th><th>Partido</th><th>Pronóstico</th></tr></thead><tbody>';
+          state.preds.forEach(p => {
+            html += `<tr><td>${p.usuario}</td><td>${p.partido}</td><td>${p.local}-${p.visitante}</td></tr>`;
+          });
+          html += '</tbody></table>';
+          content.innerHTML = html;
+        }
+      }
+    }
+
+    window.setUsuario = function() {
+      const usuario = document.getElementById('usuario').value;
+      if(usuario.trim()) {
+        state.usuario = usuario;
+        render();
+      }
+    };
+
+    window.setTab = function(t) {
+      state.tab = t;
+      render();
+    };
+
+    window.guardar = function(mid) {
+      const local = document.getElementById(`local_${mid}`).value;
+      const visitante = document.getElementById(`visitante_${mid}`).value;
+      if(local && visitante) {
+        savePred(Date.now(), state.usuario, mid, local, visitante);
+      }
+    };
+
+    window.salir = function() {
+      state.usuario = null;
+      render();
+    };
+
+    loadData();
+  </script>
+</body>
+</html>
